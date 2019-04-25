@@ -36,7 +36,7 @@
 	
         //Notulen
         function tampilNasabah(){
-            $.get('<?php echo base_url('apps/Nasabah/tampil');?>',function (data){
+            $.get('<?php echo base_url('Nasabah/tampil');?>',function (data){
                     MyTable.fnDestroy();
                     $('#data-nasabah').html(data);
                     refresh();

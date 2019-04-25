@@ -27,7 +27,7 @@
       </li>
       
       <li <?php if ($page == 'nasabah') {echo 'class="active"';} ?>>
-        <a href="<?php echo base_url('apps/Nasabah'); ?>">
+        <a href="<?php echo base_url('Nasabah'); ?>">
           <i class="fa fa-table"></i>
           <span>Nasabah</span>
         </a>
