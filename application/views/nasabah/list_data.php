@@ -9,8 +9,16 @@
       <td><?php echo $nasabah->kode_group3; ?></td>
       <td><?php echo $nasabah->kode_kantor; ?></td>
       <td class="text-center" style="min-width:180px;">
-        <button class="btn btn-warning update-dataPegawai" data-id="<?php echo $nasabah->nasabah_id; ?>"><i class="glyphicon glyphicon-repeat"></i> Update</button>
-        <button class="btn btn-danger konfirmasiHapus-pegawai" data-id="<?php echo $nasabah->nasabah_id; ?>" data-toggle="modal" data-target="#konfirmasiHapus"><i class="glyphicon glyphicon-remove-sign"></i> Delete</button>
+        <a href="<?php echo base_url('Nasabah/update'); ?>">
+			<button class="btn btn-warning update-dataNasabah" data-id="<?php echo $nasabah->nasabah_id; ?>">
+			<i class="glyphicon glyphicon-repeat"></i> Update
+			</button>
+		</a>
+        <a href="<?php echo base_url('Nasabah/deleteAnggota'); ?>">
+			<button class="btn btn-danger konfirmasiHapus-nasabah" data-id="<?php echo $nasabah->nasabah_id; ?>">
+			<i class="glyphicon glyphicon-remove-sign"></i> Delete
+			</button>
+		</a>
       </td>
     </tr>
     <?php

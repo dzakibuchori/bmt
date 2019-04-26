@@ -25,7 +25,8 @@
 </head>
 <body>
 
-<?php echo form_open_multipart('nasabah/do_upload');?>
+
+
 <div class="box box-body">
 	<div class="container" >
 		<div class="row">
@@ -36,12 +37,13 @@
 			</div>
 		</div>
 		
+	<form id="form-tambah-nasabah" method="POST">
 		<div class="row" align="center">
 			<div class="col-sm-2">
 				Nasabah ID
 			</div>
 			<div class="col-sm-9">
-				<input type="hidden" name="nasabah_id" class="full-width" id="nasabah_id" 
+				<input type="text" name="nasabah_id" class="full-width" id="nasabah_id" 
 				value="<?php echo $getNasabah->nasabah_id; ?>">
 			</div>
 		</div>
@@ -322,8 +324,10 @@
 			<tr>
 				<td colspan="2"><input type="submit" value="Simpan"></td>
 			</tr>
+	</form>
 	</div>
 	</div>
+	
 </body>
 </html>
 

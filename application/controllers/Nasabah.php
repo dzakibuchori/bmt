@@ -5,6 +5,9 @@ class Nasabah extends AUTH_Controller{
     public function __construct() {
         parent::__construct();
         $this->load->model('M_nasabah');
+		$this->load->helper(array('form', 'url'));
+		$this->load->library('upload');
+		$this->load->library("pagination");
     }
     public function index(){
         $data['userdata'] = $this->userdata;
@@ -14,7 +17,7 @@ class Nasabah extends AUTH_Controller{
         $data['judul'] = "Nasabah";
         $data['deskripsi'] = "Manage Nasabah";
 
-        //$data['modal_tambah_pegawai'] = show_my_modal('modals/modal_tambah_pegawai', 'tambah-pegawai', $data);
+        //$data['tambah_nasabah'] = show_my_modal('tambah_nasabah', 'tambah-nasabah', $data);
 
         $this->template->views('nasabah/home', $data);
     }
@@ -31,22 +34,23 @@ class Nasabah extends AUTH_Controller{
 		$data['getNasabah'] = $this->M_nasabah->getnasabah();
 		
 		$data['page'] = "Tambah";
-		$data['judul'] = "Data Anggota";
-		$data['deskripsi'] = "Manage Data Anggota";
+		$data['judul'] = "Data Nasabah";
+		$data['deskripsi'] = "Manage Data Nasabah";
 		
-		$this->template->views('modals/modal_tambah_anggota', $data);
+		$this->template->views('nasabah/tambah_nasabah', $data);
 	}
 	
-	// update data
+	// formupdate data
 	public function update(){
 		$nasabah_id = trim($_POST['nasabah_id']);
             $data['getNasabah'] = $this->M_nasabah->getnasabah($nasabah_id);
             $data['userdata'] 	= $this->userdata;
 			
 			$data['page'] = "Update";
-			$data['judul'] = "Data Anggota";
-			$data['deskripsi'] = "Manage Data Anggota";
-            echo show_my_modal('modals/modal_update_anggota', 'update-Nasabah', $data);
+			$data['judul'] = "Data Nasabah";
+			$data['deskripsi'] = "Manage Data Nasabah";
+			
+			$this->template->views('nasabah/update_nasabah', $data);
 	}
 	
 	// RegistrasiMasal
@@ -121,6 +125,54 @@ class Nasabah extends AUTH_Controller{
 			)
 		));
 		echo $res->getBody();	
+	}
+	
+	public function updateAnggota() {
+		$nasabah_id = $this->put('nasabah_id');
+		$jsonData = array(
+			'nama_nasabah'      	=> $this->_data('nama_nasabah'),
+			'alamat'      			=> $this->_data('alamat'),
+			'telpon'      			=> $this->_data('telpon'),
+			'jenis_kelamin'     	=> $this->_data('jenis_kelamin'),
+			'tempatlahir'      		=> $this->_data('tempatlahir'),
+			'tgllahir'     	 		=> $this->_data('tgllahir'),
+			'jenis_id'      		=> $this->_data('jenis_id'),
+			'no_id'      			=> $this->_data('no_id'),
+			'keterangan'      		=> $this->_data('keterangan'),
+			'kode_group1'      		=> $this->_data('kode_group1'),
+			'kode_group2'      		=> $this->_data('kode_group2'),
+			'kode_group3'      		=> $this->_data('kode_group3'),
+			'kode_agama'      		=> $this->_data('kode_agama'),
+			'propinsi'      		=> $this->_data('propinsi'),
+			'kota_kab'      		=> $this->_data('kota_kab'),
+			'kecamatan'      		=> $this->_data('kecamatan'),
+			'desa'      			=> $this->_data('desa'),
+			'waris_nama'      		=> $this->_data('waris_nama'),
+			'waris_alamat'      	=> $this->_data('waris_alamat'),
+			'waris_telp'      		=> $this->_data('waris_telp'),
+			'verifikasi'      		=> $this->_data('verifikasi'),
+			'hp'      				=> $this->_data('hp'),
+			'tgl_register'      	=> $this->_data('tgl_register'),
+			'nama_ibu_kandung'  	=> $this->_data('nama_ibu_kandung'),
+			'kodepos'      			=> $this->_data('kodepos'),
+			'kode_kantor'      		=> $this->_data('kode_kantor'),
+			'masa_berlaku_ktp'      => $this->_data('masa_berlaku_ktp'),
+			'nasabah_alternatif'    => $this->_data('nasabah_alternatif'),
+			'lokasi_usaha'      	=> $this->_data('lokasi_usaha'),
+			'status_nikah'      	=> $this->_data('status_nikah')
+		);
+		$client = new \GuzzleHttp\Client();
+		$res    = $client->put('http://180.250.246.107:4000/updateAnggota', array(
+			'form_params' => $jsonData
+		));
+		echo $res->getBody();
+	}
+
+
+	public function deleteAnggota() {
+		$client = new \GuzzleHttp\Client();
+		$res    = $client->delete('http://180.250.246.107:4000/deleteAnggota', $this->_data['nasabah_id']);
+		echo $res->getBody();
 	}
     
 }

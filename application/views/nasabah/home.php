@@ -36,3 +36,9 @@
     </table>
   </div>
 </div>
+
+<?php
+  $data['judul'] = 'Nasabah';
+  $data['url'] = 'Nasabah/import';
+  echo show_my_modal('nasabah/import_nasabah', 'import-nasabah', $data);
+?>

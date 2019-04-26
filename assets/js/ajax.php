@@ -34,7 +34,7 @@
 	}
 
 	
-        //Notulen
+        //Nasabah
         function tampilNasabah(){
             $.get('<?php echo base_url('Nasabah/tampil');?>',function (data){
                     MyTable.fnDestroy();
@@ -42,4 +42,41 @@
                     refresh();
             });
         }
+	
+	//button Hapus
+	var nasabah_id;
+	$(document).on("click", ".konfirmasiHapus-nasabah", function() {
+		nasabah_id = $(this).attr("data-id");
+	})
+	$(document).on("click", ".hapus-dataNasabah", function() {
+		var id = nasabah_id;
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('nasabah/delete'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#konfirmasiHapus').modal('hide');
+			tampilPegawai();
+			$('.msg').html(data);
+			effect_msg();
+		})
+	})
+	
+	//Button Update
+	$(document).on("click", ".update-dataNasabah", function() {
+		var id = $(this).attr("data-id");
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('nasabah/update'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#tempat-modal').html(data);
+			$('#update-nasabah').modal('show');
+		})
+	})
+	
 </script>

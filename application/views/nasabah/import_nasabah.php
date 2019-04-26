@@ -11,12 +11,13 @@
       </span>
       <input type="file"  id="fileUpload" class="form-control" name="userfile" aria-describedby="sizing-addon2">
     </div>
+	
     <div class="form-group">
-      <div class="col-md-12">
+      <div class="col-md-6">
           <button type="submit" value='upload' class="form-control btn btn-primary"> <i class="glyphicon glyphicon-ok"></i> Import Data</button>
-      
 	  </div>
-	  <div class="col-md-12">
+	  
+	  <div class="col-md-6">
           <button type="reset" class="form-control btn btn-primary"> <i class="glyphicon glyphicon-ok"></i> Hapus</button>
       </div>
 	  <!-- <div class="col-md-12">
