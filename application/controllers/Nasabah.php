@@ -4,34 +4,45 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Nasabah extends AUTH_Controller{
     public function __construct() {
         parent::__construct();
-        $this->load->model('M_nasabah');
+        
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('upload');
-		$this->load->library("pagination");
+		$this->load->model('M_nasabah');
+		$this->load->database();
     }
     public function index(){
         $data['userdata'] = $this->userdata;
-        $data['dataNasabah']= $this->M_nasabah->select_listdata();
-
+        
         $data['page'] = "nasabah";
         $data['judul'] = "Nasabah";
         $data['deskripsi'] = "Manage Nasabah";
-
-        //$data['tambah_nasabah'] = show_my_modal('tambah_nasabah', 'tambah-nasabah', $data);
-
+		
         $this->template->views('nasabah/home', $data);
     }
 	
-	// menampilkan data di list_data.php
+	/*  menampilkan data di list_data.php
     public function tampil(){
         $data['dataNasabah']= $this->M_nasabah->select_listdata();
         $this->load->view('nasabah/list_data',$data);
+    }  */
+	
+	public function getmajelis(){
+        $data['majelis'] = $this->M_nasabah->majelis();
+		
+        $this->load->views('nasabah/home', $data);
     }
+	
+	
+	public function searchNasabah() {
+		$client = new \GuzzleHttp\Client();
+		$res    = $client->post('http://180.250.246.107:4000/InquiryNasabah', $this->_data['nasabah_id']);
+		echo $res->getBody();
+	}
 	
 	// tambah anggota 1 1
 	public function tambah() {
 		$data['userdata'] = $this->userdata;
-		$data['getNasabah'] = $this->M_nasabah->getnasabah();
+		
 		
 		$data['page'] = "Tambah";
 		$data['judul'] = "Data Nasabah";
@@ -40,17 +51,11 @@ class Nasabah extends AUTH_Controller{
 		$this->template->views('nasabah/tambah_nasabah', $data);
 	}
 	
-	// formupdate data
-	public function update(){
-		$nasabah_id = trim($_POST['nasabah_id']);
-            $data['getNasabah'] = $this->M_nasabah->getnasabah($nasabah_id);
-            $data['userdata'] 	= $this->userdata;
-			
-			$data['page'] = "Update";
-			$data['judul'] = "Data Nasabah";
-			$data['deskripsi'] = "Manage Data Nasabah";
-			
-			$this->template->views('nasabah/update_nasabah', $data);
+	public function jenisID() {
+		$data['userdata'] = $this->userdata;
+		$data['getJenisID'] = $this->M_nasabah->getjenis_id();
+		
+		$this->template->views('nasabah/tambah_nasabah', $data);
 	}
 	
 	// RegistrasiMasal
@@ -167,7 +172,47 @@ class Nasabah extends AUTH_Controller{
 		));
 		echo $res->getBody();
 	}
-
+	
+	public function registrasiAnggota() {
+		$nasabah_id = $this->put('nasabah_id');
+		$jsonData = array(
+			'nama_nasabah'      	=> $this->_data('nama_nasabah'),
+			'alamat'      			=> $this->_data('alamat'),
+			'telpon'      			=> $this->_data('telpon'),
+			'jenis_kelamin'     	=> $this->_data('jenis_kelamin'),
+			'tempatlahir'      		=> $this->_data('tempatlahir'),
+			'tgllahir'     	 		=> $this->_data('tgllahir'),
+			'jenis_id'      		=> $this->_data('jenis_id'),
+			'no_id'      			=> $this->_data('no_id'),
+			'keterangan'      		=> $this->_data('keterangan'),
+			'kode_group1'      		=> $this->_data('kode_group1'),
+			'kode_group2'      		=> $this->_data('kode_group2'),
+			'kode_group3'      		=> $this->_data('kode_group3'),
+			'kode_agama'      		=> $this->_data('kode_agama'),
+			'propinsi'      		=> $this->_data('propinsi'),
+			'kota_kab'      		=> $this->_data('kota_kab'),
+			'kecamatan'      		=> $this->_data('kecamatan'),
+			'desa'      			=> $this->_data('desa'),
+			'waris_nama'      		=> $this->_data('waris_nama'),
+			'waris_alamat'      	=> $this->_data('waris_alamat'),
+			'waris_telp'      		=> $this->_data('waris_telp'),
+			'verifikasi'      		=> $this->_data('verifikasi'),
+			'hp'      				=> $this->_data('hp'),
+			'tgl_register'      	=> $this->_data('tgl_register'),
+			'nama_ibu_kandung'  	=> $this->_data('nama_ibu_kandung'),
+			'kodepos'      			=> $this->_data('kodepos'),
+			'kode_kantor'      		=> $this->_data('kode_kantor'),
+			'masa_berlaku_ktp'      => $this->_data('masa_berlaku_ktp'),
+			'nasabah_alternatif'    => $this->_data('nasabah_alternatif'),
+			'lokasi_usaha'      	=> $this->_data('lokasi_usaha'),
+			'status_nikah'      	=> $this->_data('status_nikah')
+		);
+		$client = new \GuzzleHttp\Client();
+		$res    = $client->post('http://180.250.246.107:4000/registrasiAnggota', array(
+			'form_params' => $jsonData
+		));
+		echo $res->getBody();
+	}
 
 	public function deleteAnggota() {
 		$client = new \GuzzleHttp\Client();

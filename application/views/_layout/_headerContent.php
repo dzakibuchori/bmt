@@ -1,8 +1,5 @@
-<section class="content-header">
-	<h1>
-	  Halaman <?php echo @$judul; ?>
-	  <small><?php echo @$deskripsi; ?></small>
-	</h1>
+<!-- <section class="content-header">
+	
 	<ol class="breadcrumb">
 	  <?php
 	  	for ($i=0; $i<count($this->session->flashdata('segment')); $i++) { 
@@ -22,10 +19,10 @@
 
 	  		if ($i == 0 && $i == (count($this->session->flashdata('segment'))-1)) {
 	  		?>
-				<li class="active"> Here </li>
+				
 	  		<?php
 	  		}
 	  	}
 	  ?>
 	</ol>
-</section>
+</section> -->

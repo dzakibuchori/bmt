@@ -66,7 +66,7 @@
 				Nomor Telfon
 			</div>
 			<div class="col-sm-2">
-				<input type="text" name="telfon" id="telfon" placeholder="Masukan nama anda">
+				<input type="text" name="telfon" id="telfon">
 			</div>
 				
 			<div class="col-sm-2">
@@ -109,16 +109,18 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-3">
-				<select name="jenis_kelamin" id="jenis_kelamin">
+				<select name="jenis_id" id="jenis_id">
+					<option>-Pilih Jenis ID-</option>
 					<option value='1'>SIM</option>
 					<option value='2'>KTP</option>
 					<option value='3'>KTM</option>
 					<option value='4'>NRP</option>
 					<option value='5'>NIP</option>
 					<option value='6'>DOMISILI</option>
-					<option value='7'>PASSPORT</option>
+					<option value='7'>PASPORT</option>
 					<option value='8'>LAINNYA</option>
 					<option value='9'>BPJS</option>
+					
 				</select>
 			</div>
 			<div class="col-sm-3">
@@ -158,17 +160,13 @@
 			</div>
 			<div class="col-sm-9">
 				<select name="kode_agama" id="kode_agama" class="full-width">
-					<option>-- Pilih --</option>
-			<?php
-            foreach ($kode_agama as $agama) {
-              
-             echo'<option value="'.$agama->DESKRIPSI.'">
-			 '.$agama->DESKRIPSI.'
-			  </option>';
-              
-            }
-            ?>
-			
+					<option value='Islam'>Islam</option>
+					<option value='Katholik'>Katholik</option>
+					<option value='Kong Hu Chu'>Kong Hu Chu</option>
+					<option value='Hindu'>Hindu</option>
+					<option value='Budha'>Budha</option>
+					<option value='Lain2 Kepercayaan'>Lain2 Kepercayaan</option>
+					<option value='Protestan'>Protestan</option>
 				</select>
 			</div>
 		</div>
@@ -256,24 +254,6 @@
 		
 		<div class="row">
 			<div class="col-sm-2">
-				No Telfon
-			</div>
-			<div class="col-sm-2">
-				<input type="text" name="nama" placeholder="Masukan nama anda">
-			</div>
-			<div class="col-sm-2">
-				Jenis Kelamin
-			</div>
-			<div class="col-sm-2">
-				<select name='agama'>
-					<option value='L'>Laki-laki</option>
-					<option value='P'>Perempuan</option>
-				</select>
-			</div>
-		</div>
-		
-		<div class="row">
-			<div class="col-sm-2">
 				Nama Ibu Kandung
 			</div>
 			<div class="col-sm-2">
@@ -306,7 +286,7 @@
 		
 		<div class="row">
 			<div class="col-sm-3">
-				Anggota Alternatif
+				Nasabah Alternatif
 			</div>
 			<div class="col-sm-3">
 				Lokasi Usaha
@@ -331,16 +311,15 @@
 				</select>
 			</div>
 		</div>
-		
+		<br>
 			
 			<div class="row">
-			<div class="col-sm-2">
-				<input type="submit" value="Simpan">
+				<div class="col-sm-2">
+					<a href="<?php echo base_url('Nasabah/'); ?>">
+					<button type="submit" class="form-control btn btn-primary">
+					<i class="glyphicon glyphicon-ok"></i>Simpan</button>
+				</div>
 			</div>
-			<div class="col-sm-2">
-				<input type="RESET" value="reset"/>
-			</div>
-		</div>
 			
 	</div>
 	</div>

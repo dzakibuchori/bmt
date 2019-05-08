@@ -23,15 +23,16 @@ class M_nasabah extends CI_Model{
 
 		return $data->num_rows();
 	}
-	public function getnasabah() {
-		$this->db->select('NASABAH_ID, NAMA_NASABAH, ALAMAT, TELPON, jenis_kelamin, TEMPATLAHIR, 
-		TGLLAHIR, JENIS_ID, NO_ID, KETERANGAN, kode_group1, kode_group2, kode_group3, KODE_AGAMA,
-		DESA, KECAMATAN, kota_kab, propinsi, WARIS_NAMA, WARIS_ALAMAT, WARIS_TELP, VERIFIKASI, 
-		HP, TGL_REGISTER, NAMA_IBU_KANDUNG, kodepos, KODE_KANTOR, MASA_BERLAKU_KTP, nasabah_alternatif,
-		lokasi_usaha,STATUS_NIKAH ');
-        $this->db->from('nasabah');
-        
-        $data=$this->db->get();
+	
+	public function majelis() {
+		$this->db->select('kode_group1, DESKRIPSI_GROUP1');
+		$this->db->from('css_kode_group1');
+		$this->db->order_by('kode_group1', 'ASC');
+	
+		$data=$this->db->get();
         return $data->result();
 	}
+		
+		
+		
 }

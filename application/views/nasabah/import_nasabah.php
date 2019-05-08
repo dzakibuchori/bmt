@@ -6,11 +6,12 @@
  
   <?php echo form_open_multipart('nasabah/do_upload');?>
     <div class="input-group form-group">
-      <span class="input-group-addon" id="sizing-addon2">
-        <i class="glyphicon glyphicon-file"></i>
+      <span class="input-group-addon" id="inputGroup-sizing-default">
+        Upload File
       </span>
-      <input type="file"  id="fileUpload" class="form-control" name="userfile" aria-describedby="sizing-addon2">
+      <input type="file"  id="fileUpload" class="form-control" name="userfile" aria-describedby="inputGroup-sizing-default">
     </div>
+	
 	
     <div class="form-group">
       <div class="col-md-6">
@@ -26,9 +27,7 @@
     </div> -->
 <?php echo "</form>"?>
 </div>
-<script type='text/javascript' src='<?php echo base_url();?>assets/js/jquery-1.8.2.min.js'></script>
-<script type='text/javascript' src='<?php echo base_url();?>assets/js/jquery-1.8.2.min.css'></script>
-<script src="<?php echo base_url(); ?>assets/plugins/jQuery/jquery.autocomplete.js"></script>
+
 <script type="text/javascript">
 function preview() {
             //Reference the FileUpload element.
@@ -315,17 +314,4 @@ function preview() {
             dvExcel.appendChild(table);
         };
 		
-		var site = "<?php echo site_url();?>";
-        $(function(){
-            $('.autocomplete').autocomplete({
-                // serviceUrl berisi URL ke controller/fungsi yang menangani request kita
-                serviceUrl: site+'/Nasabah/search',
-                // fungsi ini akan dijalankan ketika user memilih salah satu hasil request
-                onSelect: function (suggestion) {
-                    $('#kode_group1').val(''+suggestion.kode_group1); // membuat id 'kode_group2' untuk ditampilkan
-                    
-                }
-            });
-        });
-    </script>
 </script>

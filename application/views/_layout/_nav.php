@@ -21,7 +21,7 @@
             <img src="<?php echo base_url(); ?>assets/img/<?php echo $userdata->foto; ?>" class="img-circle" alt="User Image">
 
             <p>
-              <?php echo $userdata->nama; ?> - Keuangan
+              <?php echo $userdata->nama; ?> - ADMIN BMT ITQAN
             </p>
           </li>
           <!-- Menu Footer-->

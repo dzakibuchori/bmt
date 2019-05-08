@@ -4,7 +4,7 @@
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <!--<span class="logo-mini"><small>BMT ITQAN</small></span> -->
     <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg"><b>BMT ITQAN</b>&nbsp;ITQAN</span>
+    <span class="logo-lg"><b>BMT</b>&nbsp;ITQAN</span>
   </a>
 
   <!-- nav -->

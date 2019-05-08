@@ -321,9 +321,14 @@
 			</div>
 		</div>
 		
-			<tr>
-				<td colspan="2"><input type="submit" value="Simpan"></td>
-			</tr>
+				<div class="row">
+				<div class="col-sm-2">
+					<a href="<?php echo base_url('Nasabah/updateAnggota'); ?>">
+					<button type="submit" class="form-control btn btn-primary">
+					<i class="glyphicon glyphicon-ok"></i>Update Data</button>
+				</div>
+			</div>
+			
 	</form>
 	</div>
 	</div>
