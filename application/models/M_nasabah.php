@@ -68,6 +68,63 @@ class M_nasabah extends CI_Model{
         return $data->result();
 	}
 	
+	public function jenisID() {
+		$this->db->select('jenis_id, nama_identitas');
+		$this->db->from('css_kode_jenis_identitas');
+		$this->db->order_by('jenis_id', 'ASC');
 		
+		$data=$this->db->get();
+        return $data->result();
+	}
+	
+	public function agama() {
+		$this->db->select('deskripsi');
+		$this->db->from('css_kode_agama');
+		
+		$data=$this->db->get();
+        return $data->result();
+	}
+	
+	public function desa() {
+		$this->db->select('deskripsi_kode_kelurahan');
+		$this->db->from('css_kode_kelurahan');
+		
+		$data=$this->db->get();
+        return $data->result();
+	}
+	
+	public function kecamatan() {
+		$this->db->select('deskripsi_kode_kecamatan');
+		$this->db->from('css_kode_kecamatan');
+		
+		$data=$this->db->get();
+        return $data->result();
+	}
+	
+	public function kota_kab() {
+		$this->db->select('kode_dati, deskripsi_kode_dati');
+		$this->db->from('css_kode_dati');
+		
+		$data=$this->db->get();
+        return $data->result();
+	}
+	
+	public function provinsi() {
+		$this->db->select('kode_provinsi, nama_provinsi');
+		$this->db->from('css_kode_propvinsi');
+		
+		$data=$this->db->get();
+        return $data->result();
+	}	
+	
+	public function status_nikah() {
+		$this->db->distinct();
+		$this->db->select('kode_status, deskripsi_status');
+		$this->db->from('css_kode_status_nikah');
+		$this->db->order_by('kode_status', 'ASC');
+		
+		$data=$this->db->get();
+        return $data->result();
+	}
 		
 }

@@ -26,10 +26,15 @@ class Nasabah extends AUTH_Controller{
     }
 	
 	public function filter(){
+		 $data['userdata'] = $this->userdata;
+  
+        $data['page'] = "nasabah";
+        $data['judul'] = "Nasabah";
+        $data['deskripsi'] = "Manage Nasabah";
 		
-		$majelis = $this->input->post('majelis');
-		$petugas = $this->input->post('petugas');
-		$sektor_usaha = $this->input->post('sektor_usaha');
+		$data['majelis'] = $this->input->post('majelis');
+		$data['petugas'] = $this->input->post('petugas');
+		$data['sektor_usaha'] = $this->input->post('sektor_usaha');
 		$kantor = $this->input->post('kantor');
 		
 		 if (isset($majelis)) {
@@ -53,7 +58,7 @@ class Nasabah extends AUTH_Controller{
             $data['nasabah'] = $this->M_nasabah->search($majelis,$petugas, $sektor_usaha, $kantor);
         } 
 		else {
-           echo "Anda Belum memilih";
+           echo "PENCARIAN BELUM DIPILIH";
         }
 
         $this->template->views('nasabah/home', $data);
@@ -75,12 +80,19 @@ class Nasabah extends AUTH_Controller{
 		$data['judul'] = "Data Nasabah";
 		$data['deskripsi'] = "Manage Data Nasabah";
 		
-		$this->template->views('nasabah/tambah_nasabah', $data);
-	}
-	
-	public function jenisID() {
-		$data['userdata'] = $this->userdata;
-		$data['getJenisID'] = $this->M_nasabah->getjenis_id();
+		$data['jenisID'] = $this->M_nasabah->jenisID();
+		
+		$data['majelis'] = $this->M_nasabah->majelis();
+		$data['petugas'] = $this->M_nasabah->petugas();
+		$data['sektor_usaha'] = $this->M_nasabah->sektor_usaha();
+		$data['kantor'] = $this->M_nasabah->kantor();
+		$data['agama'] = $this->M_nasabah->agama();
+		$data['status_nikah'] = $this->M_nasabah->status_nikah();
+		
+		$data['desa'] = $this->M_nasabah->desa();
+		$data['kecamatan'] = $this->M_nasabah->kecamatan();
+		$data['kota_kab'] = $this->M_nasabah->kota_kab();
+		$data['provinsi'] = $this->M_nasabah->provinsi();
 		
 		$this->template->views('nasabah/tambah_nasabah', $data);
 	}

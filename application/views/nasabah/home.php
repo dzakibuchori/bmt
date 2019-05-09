@@ -80,7 +80,7 @@
 						</select>
 						</div>
 						
-							<button class="btn bg-teal" type="submit"> Cari</button>
+							<button class="btn bg-teal" type="submit" id="search"> Cari</button>
 							
 							<button type="button" class="btn btn-danger legitRipple" id="btnClear">Clear</button>
 					</form>	

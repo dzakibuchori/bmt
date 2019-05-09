@@ -3,54 +3,6 @@
     $('#btnClear,#btnClearBottom').on('click', function () {
         $('#sDetailNasabah').hide();
         $('#search').val('');
-});
-
-function cariNasabah() {
-    if ($("#search").val() == "") {
-        swal({
-            title             : "REQUEST GAGAL",
-            text              : 'PENCARIAN BELUM DIISI',
-            confirmButtonColor: "#EF5350",
-            type              : "error"
-        });
-        return
-    }
-    $.ajax({
-        type      : "POST",
-        url       : "<?php echo base_url();?>Nasabah/searchNasabah",
-        data      : {search: $('#search').val()},
-        dataType  : "JSON",
-        beforeSend: function () {
-            $.Loader.Show();
-        },
-        complete  : function () {
-            $.Loader.Dismiss();
-        },
-        success   : function (data) {
-            if (data.response_code == "00") {
-                $('#modal_search').modal({show: true});
-                DtNasabah(data.response_data);
-                var oTable = $('#tNasabah').dataTable();
-                oTable.$('td').attr('title', 'Klik Untuk Memilih');
-                oTable.$('td').css('cursor', 'pointer');
-                oTable.$('td').on("click", function () {
-                    var aPos = $('#tNasabah').dataTable().fnGetPosition(this);
-                    var aData = $('#tNasabah').dataTable().fnGetData(aPos[0]);
-                    $('#search').val(aData.nasabah_id);
-                });
-            } else {
-                $('#sDetailNasabah').hide();
-                ShowMessage(data.response_message, 'REQUEST GAGAL', 'danger');
-            }
-        }, error  : function (x, t, m) {
-            if (t === "timeout") {
-                ShowMessage('Tidak Bisa Melakukan Transaksi, Koneksi Jaringan Timeout', 'REQUEST GAGAL', 'danger');
-            } else {
-                ShowMessage('Tidak Bisa Melakukan Transaksi, Koneksi Jaringan Timeout', 'REQUEST GAGAL', 'danger');
-            }
-        }
-    });
-}
 
 function DtNasabah(data) {
     $('#tNasabah').DataTable({
