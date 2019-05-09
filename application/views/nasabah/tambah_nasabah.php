@@ -39,7 +39,7 @@
 				Nasabah ID
 			</div>
 			<div class="col-sm-9">
-				<input type="text" name="nasabah_id" class="full-width" id="nasabah_id">
+				<input type="text" name="nasabah_id" class="full-width" id="nasabah_id" >
 			</div>
 		</div>
 		
@@ -140,7 +140,7 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-3 ">
-			<select name="majelis" id="majelis">
+			<select name="kode_group1" id="kode_group1">
 				<option selected="selected" disabled="disabled">Pilih Majelis</option>
 					<?php
 						foreach ($majelis as $row)
@@ -151,7 +151,7 @@
 			</select>
 			</div>
 			<div class="col-sm-3">
-				<select name="petugas" id="petugas">
+				<select name="kode_group2" id="kode_group2">
 					<option selected="selected" disabled="disabled">Pilih Petugas</option>
 					<?php
 						foreach ($petugas as $row)
@@ -162,7 +162,7 @@
 			</select>
 			</div>
 			<div class="col-sm-3">
-				<select name="sektor_usaha" id="sektor_usaha">
+				<select name="kode_group3" id="kode_group3">
 					<option selected="selected" disabled="disabled">Pilih Sektor Usaha</option>
 						<?php
 							foreach ($sektor_usaha as $row)

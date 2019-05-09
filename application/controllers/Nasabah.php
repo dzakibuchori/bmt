@@ -97,6 +97,18 @@ class Nasabah extends AUTH_Controller{
 		$this->template->views('nasabah/tambah_nasabah', $data);
 	}
 	
+	public function update() {
+		$data['userdata'] = $this->userdata;
+		
+		$data['page'] = "Update";
+		$data['judul'] = "Data Nasabah";
+		$data['deskripsi'] = "Manage Data Nasabah";
+		
+            $data = array();
+            $data['result'] = $this->M_nasabah->getnasabah();
+            $this->template->view('nasabah/update_nasabah', $data);
+        }
+	
 	// RegistrasiMasal
 	public function do_upload() {
 	$fileName                = time();

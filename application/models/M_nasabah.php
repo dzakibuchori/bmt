@@ -24,6 +24,19 @@ class M_nasabah extends CI_Model{
         $data=$this->db->get();
         return $data->result();
     }
+	
+	public function getnasabah() {
+		$this->db->select('NASABAH_ID, NAMA_NASABAH, ALAMAT, TELPON, jenis_kelamin, TEMPATLAHIR, 
+		TGLLAHIR, JENIS_ID, NO_ID, KETERANGAN, kode_group1, kode_group2, kode_group3, KODE_AGAMA,
+		DESA, KECAMATAN, kota_kab, propinsi, WARIS_NAMA, WARIS_ALAMAT, WARIS_TELP, VERIFIKASI, 
+		HP, TGL_REGISTER, NAMA_IBU_KANDUNG, kodepos, KODE_KANTOR, MASA_BERLAKU_KTP, nasabah_alternatif,
+		lokasi_usaha,STATUS_NIKAH ');
+        $this->db->from('nasabah');
+        
+        $data=$this->db->get();
+        return $data->result();
+	}
+	
     public function total_rows() {
 		$data = $this->db->get('nasabah');
 
@@ -122,6 +135,15 @@ class M_nasabah extends CI_Model{
 		$this->db->select('kode_status, deskripsi_status');
 		$this->db->from('css_kode_status_nikah');
 		$this->db->order_by('kode_status', 'ASC');
+		
+		$data=$this->db->get();
+        return $data->result();
+	}
+	
+	public function kode_kantor() {
+		$this->db->select('kode_kantor, nama_kantor');
+		$this->db->from('app_kode_kantor');
+		$this->db->order_by('kode_kantor', 'ASC');
 		
 		$data=$this->db->get();
         return $data->result();
