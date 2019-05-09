@@ -53,9 +53,8 @@ class Nasabah extends AUTH_Controller{
             $data['nasabah'] = $this->M_nasabah->search($majelis,$petugas, $sektor_usaha, $kantor);
         } 
 		else {
-           $this->template->views('nasabah/home');
+           echo "Anda Belum memilih";
         }
-
 
         $this->template->views('nasabah/home', $data);
 	}
