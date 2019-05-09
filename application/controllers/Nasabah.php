@@ -12,25 +12,54 @@ class Nasabah extends AUTH_Controller{
     }
     public function index(){
         $data['userdata'] = $this->userdata;
-        
+  
         $data['page'] = "nasabah";
         $data['judul'] = "Nasabah";
         $data['deskripsi'] = "Manage Nasabah";
 		
+		$data['majelis'] = $this->M_nasabah->majelis();
+		$data['petugas'] = $this->M_nasabah->petugas();
+		$data['sektor_usaha'] = $this->M_nasabah->sektor_usaha();
+		$data['kantor'] = $this->M_nasabah->kantor();
+		
         $this->template->views('nasabah/home', $data);
     }
 	
-	/*  menampilkan data di list_data.php
-    public function tampil(){
-        $data['dataNasabah']= $this->M_nasabah->select_listdata();
-        $this->load->view('nasabah/list_data',$data);
-    }  */
-	
-	public function getmajelis(){
-        $data['majelis'] = $this->M_nasabah->majelis();
+	public function filter(){
 		
-        $this->load->views('nasabah/home', $data);
-    }
+		$majelis = $this->input->post('majelis');
+		$petugas = $this->input->post('petugas');
+		$sektor_usaha = $this->input->post('sektor_usaha');
+		$kantor = $this->input->post('kantor');
+		
+		 if (isset($majelis)) {
+            $this->load->model('M_nasabah');
+            $data['nasabah'] = $this->M_nasabah->search($majelis,$petugas, $sektor_usaha, $kantor);
+        } 
+		 else if (isset($petugas)) {
+            $this->load->model('M_nasabah');
+            $data['nasabah'] = $this->M_nasabah->search($majelis,$petugas, $sektor_usaha, $kantor);
+        } 
+		else if (isset($sektor_usaha)){
+            $this->load->model('M_nasabah');
+            $data['nasabah'] = $this->M_nasabah->search($majelis,$petugas, $sektor_usaha, $kantor);
+        } 
+		else if (isset($kantor)){
+            $this->load->model('M_nasabah');
+            $data['nasabah'] = $this->M_nasabah->search($majelis,$petugas, $sektor_usaha, $kantor);
+        } 
+		else if (isset($kantor) && isset($petugas) && isset($sektor_usaha) && isset($kantor)){
+            $this->load->model('M_nasabah');
+            $data['nasabah'] = $this->M_nasabah->search($majelis,$petugas, $sektor_usaha, $kantor);
+        } 
+		else {
+           $this->template->views('nasabah/home');
+        }
+
+
+        $this->template->views('nasabah/home', $data);
+	}
+	
 	
 	
 	public function searchNasabah() {
@@ -42,7 +71,6 @@ class Nasabah extends AUTH_Controller{
 	// tambah anggota 1 1
 	public function tambah() {
 		$data['userdata'] = $this->userdata;
-		
 		
 		$data['page'] = "Tambah";
 		$data['judul'] = "Data Nasabah";

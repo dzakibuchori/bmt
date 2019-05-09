@@ -27,7 +27,7 @@
   <body class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="<?php echo base_url(); ?>assets/index2.html"><b>Aplikasi</b>&nbsp;Notulen</a>
+        <a href="<?php echo base_url(); ?>assets/index2.html"><b>Aplikasi</b>&nbsp;BMT ITQAN</a>
       </div>
 
       <!-- /.login-logo -->

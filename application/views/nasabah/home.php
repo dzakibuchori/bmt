@@ -23,75 +23,69 @@
 					</div>
 					
 					<form class="form-horizontal" action="#">
-                    <fieldset>
-                        <div class="form-group">
-                            <label class="control-label col-lg-4 text-bold">Cari ID Nasabah/Nama
-                                Nasabah</label>
-                            <div class="col-lg-8">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="search" id="search">
-                                    <span class="input-group-btn">
-                                        <button class="btn bg-teal" type="button" onclick="cariNasabah()">
-											<i class="icon-zoomin3"></i> Cari</button>
-                                        <button type="button" class="btn btn-danger legitRipple" id="btnClear">
-                                            <i class="icon-close2"></i> Clear</button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
+                    
 					</form>
 					<br/>
+					<br/>
+					<br/>
 					
+					<div class="col-md-12">
 					<div class="form-inline">
+					<form method="get" action="<?php echo base_url("nasabah/filter")?>">
 						<div class="form-group">
 						<select name="majelis" id="majelis" class="form-control">
-							<option value="">Pilih Majelis</option>
+							<option selected="selected" disabled="disabled">Pilih Majelis</option>
 							<?php
 							foreach ($majelis as $row)
 							{
 								 echo "<option value='".$row->kode_group1."'>".$row->DESKRIPSI_GROUP1."</option>";
 							}
 							?>
-							<option value="0">KEBON KOPI / HEGARMANAH</option>
-							<option value="1">Sudah Terdistribusi</option>
 						</select>
 						</div>
 					
 						<div class="form-group">
 						<select name="petugas" id="petugas" class="form-control">
-							<option value="">Pilih Petugas</option>
-							<option value="0">MUHAMMAD FAQIH RIJALULHAQ</option>
-							<option value="1">Sudah Terdistribusi</option>
+							<option selected="selected" disabled="disabled">Pilih Petugas</option>
+							<?php
+							foreach ($petugas as $row)
+							{
+								 echo "<option value='".$row->kode_group2."'>".$row->DESKRIPSI_GROUP2."</option>";
+							}
+							?>
 						</select>
 						</div>
 					
 						<div class="form-group">
 						<select name="sektor_usaha" id="sektor_usaha" class="form-control">
-							<option value="">Pilih Sektor Usaha</option>
-							<option value="0">HOME INDUSTRI DAN KERAJINAN</option>
-							<option value="1">Sudah Terdistribusi</option>
+							<option selected="selected" disabled="disabled">Pilih Sektor Usaha</option>
+							<?php
+							foreach ($sektor_usaha as $row)
+							{
+								 echo "<option value='".$row->kode_group3."'>".$row->DESKRIPSI_GROUP3."</option>";
+							}
+							?>
 						</select>
 						</div>
 					
 						<div class="form-group">
 						<select name="kantor" id="kantor" class="form-control">
-							<option value="">Pilih kantor</option>
-							<option value="0">Kantor Cabang Kadungora</option>
-							<option value="1">Sudah Terdistribusi</option>
+							<option selected="selected" disabled="disabled">Pilih kantor</option>
+							<?php
+							foreach ($kantor as $row)
+							{
+								 echo "<option value='".$row->kode_kantor."'>".$row->nama_kantor."</option>";
+							}
+							?>
 						</select>
 						</div>
 						
-						<div class="input-group">
-							<span>
-								<button class="btn bg-teal" type="button"">
-								<i class="icon-zoomin3"></i> Cari</button>
-							</span>
-							 <span>
-								<button type="button" class="btn btn-danger legitRipple" id="btnClear">
-								<i class="icon-close2"></i> Clear</button>
-							</span>
+							<button class="btn bg-teal" type="submit"> Cari</button>
+							
+							<button type="button" class="btn btn-danger legitRipple" id="btnClear">Clear</button>
+					</form>	
 						</div>
+					</div>
 					</div>
 				</div>
         </div>
