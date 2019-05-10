@@ -16,50 +16,52 @@ class Nasabah extends AUTH_Controller{
         $data['page'] = "nasabah";
         $data['judul'] = "Nasabah";
         $data['deskripsi'] = "Manage Nasabah";
+	
 		
 		$data['majelis'] = $this->M_nasabah->majelis();
 		$data['petugas'] = $this->M_nasabah->petugas();
 		$data['sektor_usaha'] = $this->M_nasabah->sektor_usaha();
 		$data['kantor'] = $this->M_nasabah->kantor();
 		
+		$data['dataNasabah']= '';
+		
         $this->template->views('nasabah/home', $data);
     }
 	
 	public function filter(){
 		 $data['userdata'] = $this->userdata;
+	
   
         $data['page'] = "nasabah";
         $data['judul'] = "Nasabah";
         $data['deskripsi'] = "Manage Nasabah";
 		
-		$data['majelis'] = $this->input->post('majelis');
-		$data['petugas'] = $this->input->post('petugas');
-		$data['sektor_usaha'] = $this->input->post('sektor_usaha');
-		$kantor = $this->input->post('kantor');
+		$data['majelis'] = $this->M_nasabah->majelis();
+		$data['petugas'] = $this->M_nasabah->petugas();
+		$data['sektor_usaha'] = $this->M_nasabah->sektor_usaha();
+		$data['kantor'] = $this->M_nasabah->kantor();
 		
-		 if (isset($majelis)) {
-            $this->load->model('M_nasabah');
-            $data['nasabah'] = $this->M_nasabah->search($majelis,$petugas, $sektor_usaha, $kantor);
-        } 
-		 else if (isset($petugas)) {
-            $this->load->model('M_nasabah');
-            $data['nasabah'] = $this->M_nasabah->search($majelis,$petugas, $sektor_usaha, $kantor);
-        } 
-		else if (isset($sektor_usaha)){
-            $this->load->model('M_nasabah');
-            $data['nasabah'] = $this->M_nasabah->search($majelis,$petugas, $sektor_usaha, $kantor);
-        } 
-		else if (isset($kantor)){
-            $this->load->model('M_nasabah');
-            $data['nasabah'] = $this->M_nasabah->search($majelis,$petugas, $sektor_usaha, $kantor);
-        } 
-		else if (isset($kantor) && isset($petugas) && isset($sektor_usaha) && isset($kantor)){
-            $this->load->model('M_nasabah');
-            $data['nasabah'] = $this->M_nasabah->search($majelis,$petugas, $sektor_usaha, $kantor);
-        } 
-		else {
-           echo "PENCARIAN BELUM DIPILIH";
-        }
+		$majelis = $this->input->post('majelis');
+		$petugas = $this->input->post('petugas');
+		$sektor_usaha = $this->input->post('sektor_usaha');
+		$kantor = $this->input->post('kantor');
+		$result = $this->M_nasabah->search($majelis,$petugas, $sektor_usaha, $kantor);
+	
+		if(empty($result)) {
+			$data['dataNasabah']= ""; 
+				
+		} else {
+				$data['dataNasabah']= $result; 
+				
+				$this->load->library('pagination');
+				$config['base_url'] = base_url().'nasabah/filter';
+		$config['total_rows'] = count($result);
+		$config['per_page'] = 10;
+		$from = $this->uri->segment(3);
+		}
+		
+		
+		 
 
         $this->template->views('nasabah/home', $data);
 	}
@@ -225,7 +227,7 @@ class Nasabah extends AUTH_Controller{
 	}
 	
 	public function registrasiAnggota() {
-		$nasabah_id = $this->put('nasabah_id');
+		$nasabah_id = $this->post('nasabah_id');
 		$jsonData = array(
 			'nama_nasabah'      	=> $this->_data('nama_nasabah'),
 			'alamat'      			=> $this->_data('alamat'),
@@ -269,6 +271,14 @@ class Nasabah extends AUTH_Controller{
 		$client = new \GuzzleHttp\Client();
 		$res    = $client->delete('http://180.250.246.107:4000/deleteAnggota', $this->_data['nasabah_id']);
 		echo $res->getBody();
+	}
+	
+	
+	// $result = // $this->M_nasabah->search('LEMAH NENDEUT 1','ANNISA NURBAYYINAH','DAGANG MAKANAN','Kantor Cabang Padasuka');
+	public function testing()
+	{
+		$result = $this->M_nasabah->search('LEUMAH NENDEUT 1', 'ANNISA NURBAYYINAH', 'DAGANG MAKANAN', 'Kantor Cabang Padasuka');
+		print_r($result);
 	}
     
 }
