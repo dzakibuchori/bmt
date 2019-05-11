@@ -11,7 +11,7 @@ class M_nasabah extends CI_Model{
 		$this->db->join('css_kode_group1','nasabah.kode_group1=css_kode_group1.kode_group1');
         $this->db->join('css_kode_group2','nasabah.kode_group2=css_kode_group2.kode_group2');
 		$this->db->join('css_kode_group3','nasabah.kode_group3=css_kode_group3.kode_group3');
-		$this->db->join('app_kode_kantor','app_kode_kantor.kode_kantor=css_kode_group1.kode_kantor');
+		$this->db->join('app_kode_kantor','css_kode_group1.kode_kantor=app_kode_kantor.kode_kantor');
 		
 		if ($majelis !== '') {
 			$this->db->where('css_kode_group1.DESKRIPSI_GROUP1', $majelis);

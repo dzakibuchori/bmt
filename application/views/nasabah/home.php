@@ -1,6 +1,11 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 
+
+<div class="msg" style="display:none;">
+  <?php echo @$this->session->flashdata('msg'); ?>
+</div>
+
 <div class="row">
    
     <div class="panel panel-flat">
@@ -86,56 +91,68 @@
 	</div>
 </div>
 
-<table id="list-data" class="table table-bordered table-striped">
-	<thead>
-		<tr>
-			<th>Nasabah ID</th>
-			<th>Nama Nasabah</th>
-			<th>Majelis</th>
-			<th>Petugas</th>
-			<th>Sektor Usaha</th>
-			<th>Kantor</th>
-			<th style="text-align: center;">Aksi</th>
-		</tr>
-	</thead>
-		<tbody id="data-nasabah">
-			<?php if ($dataNasabah !== "") {?>
-				<?php foreach ($dataNasabah as $nasabah){ ?>
-					<tr>
-					  <td style="min-width:100px;"><?php echo $nasabah->nasabah_id; ?></td>
-					  <td ><?php echo $nasabah->nama_nasabah; ?></td>
-					  <td><?php echo $nasabah->kode_group1; ?></td>
-					  <td><?php echo $nasabah->kode_group2; ?></td>
-					  <td><?php echo $nasabah->kode_group3; ?></td>
-					  <td><?php echo $nasabah->kode_kantor; ?></td>
-					  <td class="text-center" style="min-width:180px;">
-						<a href="<?php echo base_url('Nasabah/update'); ?>">
-							<button class="btn btn-warning update-dataNasabah" data-id="<?php echo $nasabah->nasabah_id; ?>">
-							<i class="glyphicon glyphicon-repeat"></i> Update
-							</button>
-						</a>
-						<a href="<?php echo base_url('Nasabah/deleteAnggota'); ?>">
-							<button class="btn btn-danger konfirmasiHapus-nasabah" data-id="<?php echo $nasabah->nasabah_id; ?>">
-							<i class="glyphicon glyphicon-remove-sign"></i> Delete
-							</button>
-						</a>
-					  </td>
-					</tr>
-					
-				<?php } ?>
-				<?php } else { ?>
-					<tr>
-						<td class="text-center text-uppercase" colspan="7">tidak ada</td>
-					</tr>
-				<?php } ?>
-		</tbody>
-	</table>
+<div class="box">
+	<div class="box-body">
+		<table id="list-data" class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Nasabah ID</th>
+					<th>Nama Nasabah</th>
+					<th>Majelis</th>
+					<th>Petugas</th>
+					<th>Sektor Usaha</th>
+					<th>Kantor</th>
+					<th style="text-align: center;">Aksi</th>
+				</tr>
+			</thead>
+			<tbody id="data-nasabah">
+				<?php if ($dataNasabah !== "") {?>
+					<?php foreach ($dataNasabah as $nasabah){ ?>
+						<tr>
+						  <td style="min-width:100px;"><?php echo $nasabah->nasabah_id; ?></td>
+						  <td ><?php echo $nasabah->nama_nasabah; ?></td>
+						  <td><?php echo $nasabah->kode_group1; ?></td>
+						  <td><?php echo $nasabah->kode_group2; ?></td>
+						  <td><?php echo $nasabah->kode_group3; ?></td>
+						  <td><?php echo $nasabah->kode_kantor; ?></td>
+						  <td class="text-center" style="min-width:180px;">
+							<a href="<?php echo base_url('Nasabah/update'); ?>">
+								<button class="btn btn-warning update-dataNasabah" data-id="<?php echo $nasabah->nasabah_id; ?>">
+								<i class="glyphicon glyphicon-repeat"></i> Update
+								</button>
+							</a>
+							<a href="<?php echo base_url('Nasabah/deleteAnggota'); ?>">
+								<button class="btn btn-danger konfirmasiHapus-nasabah" data-id="<?php echo $nasabah->nasabah_id; ?>">
+								<i class="glyphicon glyphicon-remove-sign"></i> Delete
+								</button>
+							</a>
+						  </td>
+						</tr>
+						
+					<?php } ?>
+					<?php } else { ?>
+						<tr>
+							<td class="text-center text-uppercase" colspan="7">tidak ada</td>
+						</tr>
+					<?php } ?>
+			</tbody>
+		</table>
+	</div>
+</div>
 	
-	<script>
+	
+	<script type="text/javascript">
+	
 		$('#majelis').select2();
 		$('#petugas').select2();
 		$('#sektor_usaha').select2();
 		$('#kantor').select2();
 		
 	</script>
+	
+<?php
+  $data['judul'] = 'Nasabah';
+  $data['url'] = 'Nasabah/import';
+  echo show_my_modal('nasabah/import_nasabah', 'import-nasabah', $data);
+?>
    
