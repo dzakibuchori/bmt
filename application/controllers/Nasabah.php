@@ -274,7 +274,7 @@ class Nasabah extends AUTH_Controller{
 	// $result = // $this->M_nasabah->search('LEMAH NENDEUT 1','ANNISA NURBAYYINAH','DAGANG MAKANAN','Kantor Cabang Padasuka');
 	public function testing()
 	{
-		$result = $this->M_nasabah->search('LEUMAH NENDEUT 1', 'ANNISA NURBAYYINAH', 'DAGANG MAKANAN', 'Kantor Cabang Padasuka');
+		$result = $this->M_nasabah->search('AL BAROKAH', 'ANNISA NURBAYYINAH', 'DAGANG MAKANAN', 'Kantor Cabang Padasuka');
 		print_r($result);
 	}
     

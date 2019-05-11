@@ -33,7 +33,7 @@
 			<div class="form-inline">
 				<form method="post" action="<?php echo base_url("nasabah/filter")?>">
 					<div class="form-group">
-					<select name="nama_nasabah" id="nama_nasabah">
+					<select name="nama_nasabah" id="nama_nasabah" class="form-control">
 						<option selected="selected" disabled="disabled">Nama Nasabah</option>
 						<?php
 							foreach ($namanasabah as $row)
@@ -45,7 +45,7 @@
 					</div>
 					
 					<div class="form-group">
-					<select name="majelis" id="majelis">
+					<select name="majelis" id="majelis" class="form-control" style="width:320px">
 						<option selected="selected" disabled="disabled">Pilih Majelis</option>
 						<?php
 							foreach ($majelis as $row)
@@ -56,8 +56,10 @@
 					</select>
 					</div>
 					
+					
+					
 					<div class="form-group">
-					<select name="petugas" id="petugas">
+					<select name="petugas" id="petugas" class="form-control" style="width:320px">
 						<option selected="selected" disabled="disabled">Pilih Petugas</option>
 						<?php
 							foreach ($petugas as $row)
@@ -68,8 +70,11 @@
 					</select>
 					</div>
 					
+					<br/>
+					<br/>
+					
 					<div class="form-group">
-					<select name="sektor_usaha" id="sektor_usaha">
+					<select name="sektor_usaha" id="sektor_usaha" class="form-control" style="width:450px">
 						<option selected="selected" disabled="disabled">Pilih Sektor Usaha</option>
 						<?php
 							foreach ($sektor_usaha as $row)
@@ -81,7 +86,7 @@
 					</div>
 					
 					<div class="form-group">
-					<select name="kantor" id="kantor">
+					<select name="kantor" id="kantor" class="form-control" style="width:450px">
 						<option selected="selected" disabled="disabled">Pilih kantor</option>
 						<?php
 							foreach ($kantor as $row)
@@ -160,6 +165,7 @@
 		$('#petugas').select2();
 		$('#sektor_usaha').select2();
 		$('#kantor').select2();
+		$(".responsiveChosen").chosen({width: "50%"});
 		
 	</script>
 	

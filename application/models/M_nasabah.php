@@ -38,7 +38,6 @@ class M_nasabah extends CI_Model{
 			$this->db->where('app_kode_kantor.nama_kantor',$kantor);
 		}
 		
-		
 		$this->db->group_by('nasabah_id');
 		 $this->db->order_by('nasabah_id', 'asc');
         $data = $this->db->get('nasabah');
