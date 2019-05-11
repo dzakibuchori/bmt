@@ -22,6 +22,7 @@ class Nasabah extends AUTH_Controller{
 		$data['petugas'] = $this->M_nasabah->petugas();
 		$data['sektor_usaha'] = $this->M_nasabah->sektor_usaha();
 		$data['kantor'] = $this->M_nasabah->kantor();
+		$data['namanasabah'] = $this->M_nasabah->nama_nasabah();
 		
 		$data['dataNasabah']= '';
 		
@@ -40,24 +41,20 @@ class Nasabah extends AUTH_Controller{
 		$data['petugas'] = $this->M_nasabah->petugas();
 		$data['sektor_usaha'] = $this->M_nasabah->sektor_usaha();
 		$data['kantor'] = $this->M_nasabah->kantor();
+		$data['namanasabah'] = $this->M_nasabah->nama_nasabah();
 		
+		$namanasabah = $this->input->post('namanasabah');
 		$majelis = $this->input->post('majelis');
 		$petugas = $this->input->post('petugas');
 		$sektor_usaha = $this->input->post('sektor_usaha');
 		$kantor = $this->input->post('kantor');
-		$result = $this->M_nasabah->search($majelis,$petugas, $sektor_usaha, $kantor);
+		$result = $this->M_nasabah->search($namanasabah, $majelis,$petugas, $sektor_usaha, $kantor);
 	
 		if(empty($result)) {
 			$data['dataNasabah']= ""; 
 				
 		} else {
 				$data['dataNasabah']= $result; 
-				
-				$this->load->library('pagination');
-				$config['base_url'] = base_url().'nasabah/filter';
-		$config['total_rows'] = count($result);
-		$config['per_page'] = 10;
-		$from = $this->uri->segment(3);
 		}
 		
 		

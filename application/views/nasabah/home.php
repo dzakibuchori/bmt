@@ -33,7 +33,19 @@
 			<div class="form-inline">
 				<form method="post" action="<?php echo base_url("nasabah/filter")?>">
 					<div class="form-group">
-					<select name="majelis" id="majelis" class="form-control">
+					<select name="nama_nasabah" id="nama_nasabah">
+						<option selected="selected" disabled="disabled">Nama Nasabah</option>
+						<?php
+							foreach ($namanasabah as $row)
+							{
+								echo "<option value='".$row->nama_nasabah."'>".$row->nama_nasabah."</option>";
+							}
+						?>
+					</select>
+					</div>
+					
+					<div class="form-group">
+					<select name="majelis" id="majelis">
 						<option selected="selected" disabled="disabled">Pilih Majelis</option>
 						<?php
 							foreach ($majelis as $row)
@@ -45,7 +57,7 @@
 					</div>
 					
 					<div class="form-group">
-					<select name="petugas" id="petugas" class="form-control">
+					<select name="petugas" id="petugas">
 						<option selected="selected" disabled="disabled">Pilih Petugas</option>
 						<?php
 							foreach ($petugas as $row)
@@ -57,7 +69,7 @@
 					</div>
 					
 					<div class="form-group">
-					<select name="sektor_usaha" id="sektor_usaha" class="form-control">
+					<select name="sektor_usaha" id="sektor_usaha">
 						<option selected="selected" disabled="disabled">Pilih Sektor Usaha</option>
 						<?php
 							foreach ($sektor_usaha as $row)
@@ -69,7 +81,7 @@
 					</div>
 					
 					<div class="form-group">
-					<select name="kantor" id="kantor" class="form-control">
+					<select name="kantor" id="kantor">
 						<option selected="selected" disabled="disabled">Pilih kantor</option>
 						<?php
 							foreach ($kantor as $row)
@@ -143,6 +155,7 @@
 	
 	<script type="text/javascript">
 	
+		$('#nama_nasabah').select2();
 		$('#majelis').select2();
 		$('#petugas').select2();
 		$('#sektor_usaha').select2();

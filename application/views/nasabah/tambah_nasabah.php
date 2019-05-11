@@ -1,3 +1,6 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +15,7 @@
 			width:180px;
 		}
 		.full-width{
-			width:572px;
+			width:600px;
 		}
 		.col-md-2{
 			border:1px solid black;
@@ -109,7 +112,7 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-3">
-				<select name="jenis_id" id="jenis_id" class="form-control">
+				<select name="jenis_id" id="jenis_id">
 					<option selected="selected" disabled="disabled">Pilih Jenis ID</option>
 					<?php
 						foreach ($jenisID as $row)
@@ -385,16 +388,12 @@
 			</div>
 		</div>
 		
-		
-		
-		
-		
 		<br>
 			
 			<div class="row">
 				<div class="col-sm-2">
 					<a href="<?php echo base_url('Nasabah/'); ?>">
-					<button type="submit" class="form-control btn btn-primary">
+					<button type="submit" class="form-control btn btn-success">
 					<i class="glyphicon glyphicon-ok"></i>Simpan</button>
 				</div>
 			</div>
@@ -403,3 +402,17 @@
 	</div>
 </body>
 </html>
+
+<script type="text/javascript">
+	
+		$('#kode_group1').select2();
+		$('#kode_group2').select2();
+		$('#kode_group3').select2();
+		$('#kode_kantor').select2();
+		$('#jenis_id').select2();
+		$('#desa').select2();
+		$('#kecamatan').select2();
+		$('#kota_kab').select2();
+		$('#provinsi').select2();
+		
+	</script>

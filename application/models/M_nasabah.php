@@ -2,17 +2,20 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class M_nasabah extends CI_Model{
 	
-    public function search($majelis = '', $petugas = '',$sektor_usaha = '',$kantor = ''){
+    public function search($namanasabah = '', $majelis = '', $petugas = '',$sektor_usaha = '',$kantor = ''){
         $this->db->select('NASABAH_ID as nasabah_id, NAMA_NASABAH as nama_nasabah,
 		css_kode_group1.DESKRIPSI_GROUP1 as kode_group1, 
 		css_kode_group2.DESKRIPSI_GROUP2 as kode_group2, 
 		css_kode_group3.DESKRIPSI_GROUP3 as kode_group3,
 		app_kode_kantor.nama_kantor as kode_kantor');
-		$this->db->join('css_kode_group1','nasabah.kode_group1=css_kode_group1.kode_group1');
-        $this->db->join('css_kode_group2','nasabah.kode_group2=css_kode_group2.kode_group2');
-		$this->db->join('css_kode_group3','nasabah.kode_group3=css_kode_group3.kode_group3');
-		$this->db->join('app_kode_kantor','css_kode_group1.kode_kantor=app_kode_kantor.kode_kantor');
-		
+		$this->db->join('css_kode_group1','nasabah.kode_group1=css_kode_group1.kode_group1' , 'LEFT');
+        $this->db->join('css_kode_group2','nasabah.kode_group2=css_kode_group2.kode_group2', 'LEFT');
+		$this->db->join('css_kode_group3','nasabah.kode_group3=css_kode_group3.kode_group3', 'LEFT');
+		$this->db->join('app_kode_kantor','nasabah.kode_kantor=app_kode_kantor.kode_kantor ', 'LEFT');
+	
+		if ($namanasabah !== '') {
+			$this->db->where('NAMA_NASABAH', $namanasabah);
+		}
 		if ($majelis !== '') {
 			$this->db->where('css_kode_group1.DESKRIPSI_GROUP1', $majelis);
 		}
@@ -28,6 +31,13 @@ class M_nasabah extends CI_Model{
 		if ($kantor !== '') {
 			$this->db->where('app_kode_kantor.nama_kantor',$kantor);
 		}
+		if (($majelis !== '') && ($petugas !== '') && ($sektor_usaha !== '') && ($kantor !== ''))  {
+			$this->db->where('css_kode_group1.DESKRIPSI_GROUP1', $majelis);
+			$this->db->where('css_kode_group2.DESKRIPSI_GROUP2',$petugas);
+			$this->db->where('css_kode_group3.DESKRIPSI_GROUP3',$sektor_usaha);
+			$this->db->where('app_kode_kantor.nama_kantor',$kantor);
+		}
+		
 		
 		$this->db->group_by('nasabah_id');
 		 $this->db->order_by('nasabah_id', 'asc');
@@ -51,6 +61,15 @@ class M_nasabah extends CI_Model{
 		$data = $this->db->get('nasabah');
 
 		return $data->num_rows();
+	}
+	
+	public function nama_nasabah() {
+		$this->db->select('nasabah_id, nama_nasabah');
+		$this->db->from('nasabah');
+		$this->db->order_by('nasabah_id', 'ASC');
+		
+		$data=$this->db->get();
+        return $data->result();
 	}
 	
 	public function majelis() {
