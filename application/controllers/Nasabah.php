@@ -29,6 +29,7 @@ class Nasabah extends AUTH_Controller
         $data['namanasabah'] = $this->M_nasabah->nama_nasabah();
 
         $data['dataNasabah'] = '';
+        $data["links"] = "";
 
         $this->template->views('nasabah/home', $data);
     }
@@ -52,6 +53,12 @@ class Nasabah extends AUTH_Controller
         $petugas = $this->input->post('petugas');
         $sektor_usaha = $this->input->post('sektor_usaha');
         $kantor = $this->input->post('kantor');
+
+        $this->session->set_userdata('namanasabah',$namanasabah);
+        $this->session->set_userdata('majelis',$majelis);
+        $this->session->set_userdata('petugas',$petugas);
+        $this->session->set_userdata('sektor_usaha',$sektor_usaha);
+        $this->session->set_userdata('kantor',$kantor);
 
         /* -------------------------------------------------------------------------------------------------------------------------- */
         $result = $this->M_nasabah->search($namanasabah, $majelis, $petugas, $sektor_usaha, $kantor);
@@ -88,10 +95,13 @@ class Nasabah extends AUTH_Controller
 
         if (empty($result)) {
             $data['dataNasabah'] = "";
+            $data["links"] = "";
+
         } else {
             $data['dataNasabah'] = $result;
             /* ---------------------------------------------------------------- */
             $data["links"] = $this->pagination->create_links();
+			
             /* ---------------------------------------------------------------- */
         }
 
@@ -133,15 +143,30 @@ class Nasabah extends AUTH_Controller
 
     public function update()
     {
-        $data['userdata'] = $this->userdata;
-
+        $data['userdata'] 	= $this->userdata;
+			
         $data['page'] = "Update";
         $data['judul'] = "Data Nasabah";
         $data['deskripsi'] = "Manage Data Nasabah";
+		
+		$data['jenisID'] = $this->M_nasabah->jenisID();
+		$data['majelis'] = $this->M_nasabah->majelis();
+        $data['petugas'] = $this->M_nasabah->petugas();
+        $data['sektor_usaha'] = $this->M_nasabah->sektor_usaha();
+        $data['kantor'] = $this->M_nasabah->kantor();
+        $data['agama'] = $this->M_nasabah->agama();
+        $data['status_nikah'] = $this->M_nasabah->status_nikah();
+
 
         $data = array();
         $data['result'] = $this->M_nasabah->getnasabah();
-        $this->template->view('nasabah/update_nasabah', $data);
+
+        $data['desa'] = $this->M_nasabah->desa();
+        $data['kecamatan'] = $this->M_nasabah->kecamatan();
+        $data['kota_kab'] = $this->M_nasabah->kota_kab();
+        $data['provinsi'] = $this->M_nasabah->provinsi();
+			
+        $this->template->views('nasabah/update_nasabah', $data);
     }
 
     // RegistrasiMasal

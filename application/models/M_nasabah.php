@@ -34,21 +34,47 @@ class M_nasabah extends CI_Model{
 			$this->db->where('app_kode_kantor.nama_kantor', $kantor);
 		}
 
+		$this->db->group_by('nasabah_id');
         $this->db->order_by('nasabah.NASABAH_ID', 'asc');
         $query = $this->db->get('nasabah', $limit, $offset);
         return $query->result();
     }
 	
 	public function getnasabah() {
-		$this->db->select('NASABAH_ID, NAMA_NASABAH, ALAMAT, TELPON, jenis_kelamin, TEMPATLAHIR, 
-		TGLLAHIR, JENIS_ID, NO_ID, KETERANGAN, kode_group1, kode_group2, kode_group3, KODE_AGAMA,
-		DESA, KECAMATAN, kota_kab, propinsi, WARIS_NAMA, WARIS_ALAMAT, WARIS_TELP, VERIFIKASI, 
-		HP, TGL_REGISTER, NAMA_IBU_KANDUNG, kodepos, KODE_KANTOR, MASA_BERLAKU_KTP, nasabah_alternatif,
-		lokasi_usaha,STATUS_NIKAH ');
+		$this->db->select('NASABAH_ID as nasabah_id, NAMA_NASABAH as nama_nasabah, 
+		ALAMAT as alamat, TELPON as telpon, jenis_kelamin, TEMPATLAHIR as tempatlahir, 
+		TGLLAHIR as tanggallahir, 
+		css_kode_jenis_identitas.nama_identitas as jenis_id, 
+		NO_ID, nasabah.KETERANGAN as keterangan, 
+		css_kode_group1.DESKRIPSI_GROUP1 as kode_group1,
+		css_kode_group2.DESKRIPSI_GROUP2 as kode_group2,
+		css_kode_group3.DESKRIPSI_GROUP3 as kode_group3,
+		css_kode_agama.deskripsi as kode_agama, 
+		css_kode_kelurahan.deskripsi_kode_kelurahan as desa, 
+		css_kode_kecamatan.deskripsi_kode_kecamatan as kecamatan, 
+		css_kode_dati.deskripsi_kode_dati as kota_kab, 
+		css_kode_propvinsi.nama_provinsi as propinsi, 
+		WARIS_NAMA as waris_nama, 
+		WARIS_ALAMAT as waris_alamat, WARIS_TELP as waris_telp, VERIFIKASI as verifikasi, 
+		HP, TGL_REGISTER as tgl_registrasi, NAMA_IBU_KANDUNG as nama_ibu_kandung, 
+		nasabah.kodepos, 
+		app_kode_kantor.nama_kantor as kode_kantor, 
+		MASA_BERLAKU_KTP as masa_berlaku_ktp, 
+		nasabah_alternatif, lokasi_usaha,STATUS_NIKAH as status_nikah ');
         $this->db->from('nasabah');
         
-        $data=$this->db->get();
-        return $data->result();
+		$this->db->join('css_kode_jenis_identitas','nasabah.jenis_id = css_kode_jenis_identitas.jenis_id' , 'LEFT');
+        $this->db->join('css_kode_group1','nasabah.kode_group1 = css_kode_group1.kode_group1' , 'LEFT');
+        $this->db->join('css_kode_group2','nasabah.kode_group2 = css_kode_group2.kode_group2', 'LEFT');
+		$this->db->join('css_kode_group3','nasabah.kode_group3 = css_kode_group3.kode_group3', 'LEFT');
+		$this->db->join('css_kode_agama','nasabah.kode_agama = css_kode_agama.deskripsi', 'LEFT');
+		$this->db->join('css_kode_kelurahan','nasabah.desa = css_kode_kelurahan.kode_kelurahan', 'LEFT');
+		$this->db->join('css_kode_kecamatan','nasabah.kecamatan = css_kode_kecamatan.kode_kecamatan', 'LEFT');
+		$this->db->join('css_kode_dati','nasabah.kota_kab = css_kode_dati.kode_dati', 'LEFT');
+		$this->db->join('css_kode_propvinsi','nasabah.propinsi = css_kode_propvinsi.kode_provinsi', 'LEFT');
+		$this->db->join('app_kode_kantor','nasabah.kode_kantor = app_kode_kantor.kode_kantor ', 'LEFT');
+		$data=$this->db->get();
+        return $data->row();
 	}
 	
     public function total_rows() {
